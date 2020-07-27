@@ -1,1 +1,1 @@
-# test-mta
+# Multi-target application test
