@@ -1,0 +1,11 @@
+[id$="ButtonBar"] {
+    padding: .5rem 2rem .5rem 2rem;
+}
+
+[id$="ButtonBar"] > * {
+    width: 100%;
+}
+
+[id$="ButtonBar"] :first-child {
+    margin-right: 1rem;
+}

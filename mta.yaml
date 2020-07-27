@@ -1,3 +1,33 @@
 ID: test-mta
 _schema-version: '2.1'
 version: 1.0.0
+
+modules:
+ - name: test-mta-ui
+   type: html5
+   path: test-mta-ui
+   parameters:
+      disk-quota: 512M
+      memory: 256M
+   build-parameters:
+      builder: grunt
+   requires:
+    - name: uaa_test-mta
+    - name: dest_test-mta
+
+ 
+
+resources:
+ - name: uaa_test-mta
+   parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+   type: org.cloudfoundry.managed-service
+
+ - name: dest_test-mta
+   parameters:
+      service-plan: lite
+      service: destination
+   type: org.cloudfoundry.managed-service
+

@@ -1,0 +1,21 @@
+{
+  "welcomeFile": "/test-mta-ui/index.html",
+  "authenticationMethod": "route",
+  "logout": {
+    "logoutEndpoint": "/do/logout"
+  },
+  "routes": [
+    {
+      "source": "^/northwind/(.*)$",
+      "target": "$1",
+      "authenticationType": "none",
+      "destination": "northwind",
+      "csrfProtection": false
+    },
+    {
+      "source": "^/test-mta-ui/(.*)$",
+      "target": "$1",
+      "localDir": "webapp"
+    }
+  ]
+}

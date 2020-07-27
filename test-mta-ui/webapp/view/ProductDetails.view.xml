@@ -1,0 +1,31 @@
+<mvc:View controllerName="test.test-mta-ui.controller.ProductDetails" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+  xmlns:html="http://www.w3.org/1999/xhtml">
+  <App>
+    <pages>
+      <Page title="{i18n>title}" navButtonPress="onBack">
+        <content>
+          <sap.ui.layout:VerticalLayout width="50%" xmlns:sap.ui.layout="sap.ui.layout">
+            <sap.ui.layout:content>
+              <VBox xmlns="sap.m" width="100%" direction="Column" alignItems="Center" id="container">
+                <items>
+                  <sap.ui.layout.form:SimpleForm editable="true" layout="ResponsiveGridLayout" xmlns:sap.ui.layout.form="sap.ui.layout.form" id="form0">
+                    <sap.ui.layout.form:content>
+                      <core:Title text="{i18n>productDetails}"/>
+                      <Label text="{i18n>productId}"/>
+                      <Input width="30%" value="{oDataModel>ProductID}" editable="false"/>
+                      <Label text="{i18n>productName}"/>
+                      <Input width="100%" value="{oDataModel>ProductName}" editable="false"/>
+                      <Label text="{i18n>supplierId}"/>
+                      <Input width="30%" value="{oDataModel>SupplierID}" editable="false"/>
+                      <Text text="etc..."/>
+                    </sap.ui.layout.form:content>
+                  </sap.ui.layout.form:SimpleForm>
+                </items>
+              </VBox>
+            </sap.ui.layout:content>
+          </sap.ui.layout:VerticalLayout>
+        </content>
+      </Page>
+    </pages>
+  </App>
+</mvc:View>
