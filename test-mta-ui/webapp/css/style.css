@@ -9,3 +9,9 @@
 [id$="ButtonBar"] :first-child {
     margin-right: 1rem;
 }
+
+[id$="detail-form"] {
+    width: 40%;
+    margin-left: 2rem;
+    display: inline-block;
+}

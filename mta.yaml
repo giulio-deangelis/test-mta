@@ -1,6 +1,6 @@
 ID: test-mta
 _schema-version: '2.1'
-version: 1.0.0
+version: 1.0.1
 
 modules:
  - name: test-mta-ui

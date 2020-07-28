@@ -1,77 +1,138 @@
-<mvc:View controllerName="test.test-mta-ui.controller.Home" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+<mvc:View controllerName="test.test-mta-ui.controller.Home" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" displayBlock="true">
   <Shell id="shell">
-  <App id="app">
-    <pages>
-    <Page id="page" title="{i18n>title}">
-      <content>
-      <sap.ui.layout:VerticalLayout xmlns:sap.ui.layout="sap.ui.layout" id="tableContainer">
-        <sap.ui.layout:content>
-        <HBox width="100%" id="topButtonBar" justifyContent="Center">
-          <items>
-          <Button xmlns="sap.m" id="topPrevButton" icon="sap-icon://arrow-left" width="100%" press="onPrevButtonPress"/>
-          <Button xmlns="sap.m" id="topNextButton" icon="sap-icon://arrow-right" width="100%" press="onNextButtonPress"/>
-          </items>
-        </HBox>
-        <Table items="{orders>/results}" id="table" alternateRowColors="true">
-          <headerToolbar>
-          <Toolbar>
-            <Title width="100%" text="{i18n>orderTableTitle}" id="tableTitle"/>
-            <Button
-              action:wiring="\{'press':\{'navigation':\{'routeName':'Products'\}\}\}"
-              xmlns="sap.m" 
-              text="Products" 
-              id="productsButton" 
-              xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" 
-              press="onProductsButtonPress" 
-              icon="sap-icon://product"
-            />
-            <SearchField width="100%" placeholder="{i18n>orderSearchPlaceholder}" search="onSearch"/>
-          </Toolbar>
-          </headerToolbar>
-          <items>
-          <ColumnListItem type="Active" press="onOrderPress">
-            <cells>
-            <Text text="{orders>OrderID}"/>
-            <Text text="{orders>CustomerID}"/>
-            <Text text="{orders>EmployeeID}"/>
-            <Text text="{orders>OrderDate}"/>
-            <Text text="{orders>RequiredDate}"/>
-            <Text text="{orders>ShippedDate}"/>
-            </cells>
-          </ColumnListItem>
-          </items>
-          <columns>
-          <Column>
-            <header><Label text="{i18n>orderId}"/></header>
-          </Column>
-          <Column>
-            <header><Label text="{i18n>customerId}"/></header>
-          </Column>
-          <Column>
-            <header><Label text="{i18n>employeeId}"/></header>
-          </Column>
-          <Column>
-            <header><Label text="{i18n>orderDate}"/></header>
-          </Column>
-          <Column>
-            <header><Label text="{i18n>requiredDate}"/></header>
-          </Column>
-          <Column>
-            <header><Label text="{i18n>shippedDate}"/></header>
-          </Column>
-          </columns>
-        </Table>
-        </sap.ui.layout:content>
-        <HBox xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:sap.ui.layout="sap.ui.layout" width="100%" justifyContent="Center" id="bottomButtonBar">
-        <items>
-          <Button xmlns="sap.m" id="bottomPrevButton" icon="sap-icon://arrow-left" width="100%" press="onPrevButtonPress"/>
-          <Button xmlns="sap.m" id="bottomNextButton" icon="sap-icon://arrow-right" width="100%" press="onNextButtonPress"/>
-        </items>
-        </HBox>
-      </sap.ui.layout:VerticalLayout>
-      </content>
-    </Page>
-    </pages>
-  </App>
+    <App id="app">
+      <pages>
+        <Page id="page" title="{i18n>title}">
+          <content>
+            <SplitApp id="split" initialDetail="detail">
+              <masterPages>
+                <Page id="master">
+                  <content>
+                    <Table items="{oDataModel>/Orders}" growing="true" growingScrollToLoad="true" id="table">
+                      <items>
+                        <ColumnListItem type="Active" press="onRowPress">
+                          <cells>
+                            <Text text="{oDataModel>OrderID}"/>
+                            <Text text="{oDataModel>ShipName}"/>
+                          </cells>
+                        </ColumnListItem>
+                      </items>
+                      <columns>
+                        <Column>
+                          <header><Label text="{i18n>orderId}"/></header>
+                        </Column>
+                        <Column>
+                          <header><Label text="{i18n>shipName}"/></header>
+                        </Column>
+                      </columns>
+                    </Table>
+                  </content>
+                </Page>
+              </masterPages>
+              <detailPages>
+                <Page id="detail">
+                  <content>
+                    <sap.ui.layout.form:SimpleForm editable="false" layout="ResponsiveGridLayout" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns:sap.ui.core="sap.ui.core" id="detail-form">
+                      <sap.ui.layout.form:content>
+                        <sap.ui.core:Title text="{i18n>details}"/>
+                        <Label text="{i18n>orderId}"/>
+                        <Input editable="false" value="{oDataModel>OrderID}"/>
+                        <Label text="{i18n>customerId}"/>
+                        <Input editable="false" value="{oDataModel>CustomerID}"/>
+                        <Label text="{i18n>employeeId}"/>
+                        <Input editable="false" value="{oDataModel>EmployeeID}"/>
+                        <Label text="{i18n>orderDate}"/>
+                        <Input editable="false" value="{oDataModel>OrderDate}"/>
+                        <Label text="{i18n>requiredDate}"/>
+                        <Input editable="false" value="{oDataModel>RequiredDate}"/>
+                        <Label text="{i18n>shippedDate}"/>
+                        <Input editable="false" value="{oDataModel>ShippedDate}"/>
+                        <Label text="{i18n>shipVia}"/>
+                        <Input editable="false" value="{oDataModel>ShipVia}"/>
+                        <Label text="{i18n>freight}"/>
+                        <Input editable="false" value="{oDataModel>Freight}"/>
+                        <Label text="{i18n>shipName}"/>
+                        <Input editable="false" value="{oDataModel>ShipName}"/>
+                        <Label text="{i18n>shipAddress}"/>
+                        <Input editable="false" value="{oDataModel>ShipAddress}"/>
+                        <Label text="{i18n>shipCity}"/>
+                        <Input editable="false" value="{oDataModel>ShipCity}"/>
+                        <Label text="{i18n>shipRegion}"/>
+                        <Input editable="false" value="{oDataModel>ShipRegion}"/>
+                        <Label text="{i18n>shipPostalCode}"/>
+                        <Input editable="false" value="{oDataModel>ShipPostalCode}"/>
+                        <Label text="{i18n>shipCountry}"/>
+                        <Input editable="false" value="{oDataModel>ShipCountry}"/>
+                      </sap.ui.layout.form:content>
+                    </sap.ui.layout.form:SimpleForm>
+                  </content>
+                </Page>
+              </detailPages>
+            </SplitApp>
+            <!--<HBox  id="topButtonBar" justifyContent="Center">-->
+            <!--  <items>-->
+            <!--  <Button xmlns="sap.m" id="topPrevButton" icon="sap-icon://arrow-left"  press="onPrevButtonPress"/>-->
+            <!--  <Button xmlns="sap.m" id="topNextButton" icon="sap-icon://arrow-right"  press="onNextButtonPress"/>-->
+            <!--  </items>-->
+            <!--</HBox>-->
+            <!--<Table items="{orders>/results}" id="table" alternateRowColors="true">-->
+            <!--  <headerToolbar>-->
+            <!--  <Toolbar>-->
+            <!--    <Title  text="{i18n>orderTableTitle}" id="tableTitle"/>-->
+            <!--    <Button-->
+            <!--      action:wiring="\{'press':\{'navigation':\{'routeName':'Products'\}\}\}"-->
+            <!--      xmlns="sap.m" -->
+            <!--      text="Products" -->
+            <!--      id="productsButton" -->
+            <!--      xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" -->
+            <!--      press="onProductsButtonPress" -->
+            <!--      icon="sap-icon://product"-->
+            <!--    />-->
+            <!--    <SearchField  placeholder="{i18n>orderSearchPlaceholder}" search="onSearch"/>-->
+            <!--  </Toolbar>-->
+            <!--  </headerToolbar>-->
+            <!--  <items>-->
+            <!--  <ColumnListItem type="Active" press="onOrderPress">-->
+            <!--    <cells>-->
+            <!--    <Text text="{orders>OrderID}"/>-->
+            <!--    <Text text="{orders>CustomerID}"/>-->
+            <!--    <Text text="{orders>EmployeeID}"/>-->
+            <!--    <Text text="{orders>OrderDate}"/>-->
+            <!--    <Text text="{orders>RequiredDate}"/>-->
+            <!--    <Text text="{orders>ShippedDate}"/>-->
+            <!--    </cells>-->
+            <!--  </ColumnListItem>-->
+            <!--  </items>-->
+            <!--  <columns>-->
+            <!--  <Column>-->
+            <!--    <header><Label text="{i18n>orderId}"/></header>-->
+            <!--  </Column>-->
+            <!--  <Column>-->
+            <!--    <header><Label text="{i18n>customerId}"/></header>-->
+            <!--  </Column>-->
+            <!--  <Column>-->
+            <!--    <header><Label text="{i18n>employeeId}"/></header>-->
+            <!--  </Column>-->
+            <!--  <Column>-->
+            <!--    <header><Label text="{i18n>orderDate}"/></header>-->
+            <!--  </Column>-->
+            <!--  <Column>-->
+            <!--    <header><Label text="{i18n>requiredDate}"/></header>-->
+            <!--  </Column>-->
+            <!--  <Column>-->
+            <!--    <header><Label text="{i18n>shippedDate}"/></header>-->
+            <!--  </Column>-->
+            <!--  </columns>-->
+            <!--</Table>-->
+            <!--<HBox xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:sap.ui.layout="sap.ui.layout"  justifyContent="Center" id="bottomButtonBar">-->
+            <!--<items>-->
+            <!--  <Button xmlns="sap.m" id="bottomPrevButton" icon="sap-icon://arrow-left"  press="onPrevButtonPress"/>-->
+            <!--  <Button xmlns="sap.m" id="bottomNextButton" icon="sap-icon://arrow-right"  press="onNextButtonPress"/>-->
+            <!--</items>-->
+            <!--</HBox>-->
+          </content>
+        </Page>
+      </pages>
+    </App>
   </Shell>
 </mvc:View>
